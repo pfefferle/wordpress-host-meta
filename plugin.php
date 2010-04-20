@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://notizblog.org/
 Description: Host Metadata for WordPress (IETF-Draft: http://tools.ietf.org/html/draft-nottingham-site-meta-01)
-Version: 0.1
+Version: 0.2
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 */
