@@ -2,7 +2,7 @@
 /*
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
-Description: Host Metadata for WordPress (IETF-Draft: http://tools.ietf.org/html/draft-hammer-hostmeta)
+Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
 Version: 0.4.3
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
