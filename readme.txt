@@ -6,7 +6,7 @@ Requires at least: 3.0.5
 Tested up to: 3.2
 Stable tag: 0.4.3
 
-This plugin provides a host-meta - file for WordPress (RFC Draft: http://tools.ietf.org/html/draft-hammer-hostmeta).
+This plugin provides a host-meta - file for WordPress (RFC: http://tools.ietf.org/html/rfc6415).
 
 The plugin requires the `/.well-known/`-plugin: http://wordpress.org/extend/plugins/well-known/!
 
