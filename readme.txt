@@ -1,5 +1,5 @@
 === host-meta ===
-Contributors: Matthias Pfefferle
+Contributors: pfefferle
 Donate link: http://14101978.de
 Tags: OpenID, XRD, well-known, XML, Discovery, host-meta, Webfinger
 Requires at least: 3.0.5
