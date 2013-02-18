@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.0.0
+Version: 1.0.1
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 */
@@ -48,7 +48,10 @@ class HostMetaPlugin {
    */
   function parse_request($wp) {
     // check if "host-meta" param exists
-    if (!array_key_exists('host-meta', $wp->query_vars)) {
+    if (!array_key_exists('host-meta', $wp->query_vars) &&
+        !(array_key_exists('well-known', $wp->query_vars) &&
+          (($wp->query_vars['well-known'] == "host-meta") ||
+          ($wp->query_vars['well-known'] == "host-meta.json")))) {
       return;
     }
     
@@ -186,7 +189,7 @@ class HostMetaPlugin {
 
 add_action('query_vars', array('HostMetaPlugin', 'query_vars'));
 add_action('parse_request', array('HostMetaPlugin', 'parse_request'), 1);
-add_action('generate_rewrite_rules', array('HostMetaPlugin', 'rewrite_rules'));
+add_action('generate_rewrite_rules', array('HostMetaPlugin', 'rewrite_rules'), 1);
 
 add_action('host_meta_render_json', array('HostMetaPlugin', 'render_jrd'), 42, 1);
 add_action('host_meta_render_jrd', array('HostMetaPlugin', 'render_jrd'), 42, 1);

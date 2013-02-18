@@ -4,7 +4,7 @@ Donate link: http://14101978.de
 Tags: OpenID, XRD, well-known, XML, Discovery, host-meta, Webfinger
 Requires at least: 3.0.5
 Tested up to: 3.5.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 
 This plugin provides a host-meta - file for WordPress (RFC: http://tools.ietf.org/html/rfc6415).
 
@@ -31,6 +31,8 @@ From the RFC:
    to be used by multiple Web-based protocols.
 
 == Changelog ==
+= 1.0.1 =
+* bug fix
 = 1.0.0 =
 * refactoring
 * deprecated well-known plugin
