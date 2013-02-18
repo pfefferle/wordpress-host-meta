@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.0.1
+Version: 1.0.2
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 */
@@ -48,14 +48,11 @@ class HostMetaPlugin {
    */
   function parse_request($wp) {
     // check if "host-meta" param exists
-    if (!array_key_exists('host-meta', $wp->query_vars) &&
-        !(array_key_exists('well-known', $wp->query_vars) &&
-          (($wp->query_vars['well-known'] == "host-meta") ||
-          ($wp->query_vars['well-known'] == "host-meta.json")))) {
+    if (!array_key_exists('host-meta', $wp->query_vars)) {
       return;
     }
     
-    $format = "jrd";
+    $format = "json";
     if (array_key_exists('format', $wp->query_vars)) {
       $format = $wp->query_vars["format"];
     }
@@ -64,6 +61,26 @@ class HostMetaPlugin {
     
     do_action("host_meta_render", $format, $host_meta, $wp->query_vars);
     do_action("host_meta_render_{$format}", $host_meta, $wp->query_vars);
+  }
+  
+  /**
+   * well-known fix
+   *
+   * @param array
+   */
+  function well_known_fix($wp) {
+    // check if 'well-known' param exists
+    if (array_key_exists('well-known', $wp->query_vars)) {
+      // if host-meta is set, add required query vars
+      if ($wp->query_vars['well-known'] == 'host-meta') {
+        $wp->query_vars['host-meta'] = true;
+        $wp->query_vars['format'] = 'xrd';
+      // if host-meta.json is set, add required query vars
+      } elseif($wp->query_vars['well-known'] == 'host-meta.json') {
+        $wp->query_vars['host-meta'] = true;
+        $wp->query_vars['format'] = 'json';
+      }
+    }
   }
   
   /**
@@ -188,7 +205,8 @@ class HostMetaPlugin {
 }
 
 add_action('query_vars', array('HostMetaPlugin', 'query_vars'));
-add_action('parse_request', array('HostMetaPlugin', 'parse_request'), 1);
+add_action('parse_request', array('HostMetaPlugin', 'well_known_fix'), 1);
+add_action('parse_request', array('HostMetaPlugin', 'parse_request'), 2);
 add_action('generate_rewrite_rules', array('HostMetaPlugin', 'rewrite_rules'), 1);
 
 add_action('host_meta_render_json', array('HostMetaPlugin', 'render_jrd'), 42, 1);
