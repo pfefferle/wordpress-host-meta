@@ -53,10 +53,9 @@ From the RFC:
 
 == Installation ==
 
-1. You have to download and install the `/.well-known/`-plugin first: http://wordpress.org/extend/plugins/well-known/
-2. Then you have to upload the `host-meta`-folder to the `/wp-content/plugins/` directory
-3. Activate the plugin through the *Plugins* menu in WordPress
-4. ...and that's it :)
+1. Then you have to upload the `host-meta`-folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the *Plugins* menu in WordPress
+3. ...and that's it :)
 
 == Frequently Asked Questions ==
 
