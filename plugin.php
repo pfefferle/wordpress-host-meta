@@ -47,7 +47,7 @@ class HostMetaPlugin {
    * @param array
    */
   function parse_request($wp) {
-    // check if "resource" param exists
+    // check if "host-meta" param exists
     if (!array_key_exists('host-meta', $wp->query_vars)) {
       return;
     }
