@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.0.2
+Version: 1.0.3
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 */
@@ -21,7 +21,7 @@ class HostMetaPlugin {
    * @return array
    */
   function query_vars($vars) {
-    $vars[] = 'host-meta';
+    $vars[] = 'well-known';
     $vars[] = 'format';
 
     return $vars;
@@ -34,8 +34,8 @@ class HostMetaPlugin {
    */
   function rewrite_rules($wp_rewrite) {
     $host_meta_rules = array(
-      '(.well-known/host-meta.json)' => 'index.php?host-meta=true&format=jrd',
-      '(.well-known/host-meta)' => 'index.php?host-meta=true&format=xrd',
+      '(.well-known/host-meta.json)' => 'index.php?well-known=host-meta',
+      '(.well-known/host-meta)' => 'index.php?well-known=host-meta.json',
     );
 
     $wp_rewrite->rules = $host_meta_rules + $wp_rewrite->rules;
@@ -48,39 +48,22 @@ class HostMetaPlugin {
    */
   function parse_request($wp) {
     // check if "host-meta" param exists
-    if (!array_key_exists('host-meta', $wp->query_vars)) {
+    if (!array_key_exists('well-known', $wp->query_vars)) {
       return;
     }
     
-    $format = "json";
-    if (array_key_exists('format', $wp->query_vars)) {
-      $format = $wp->query_vars["format"];
+    if ($wp->query_vars["well-known"] == "host-meta") {
+      $format = "xrd";
+    } elseif ($wp->query_vars["well-known"] == "host-meta.json") {
+      $format = "jrd";
+    } else {
+      return;
     }
     
     $host_meta = apply_filters('host_meta', array(), $wp->query_vars);
     
     do_action("host_meta_render", $format, $host_meta, $wp->query_vars);
     do_action("host_meta_render_{$format}", $host_meta, $wp->query_vars);
-  }
-  
-  /**
-   * well-known fix
-   *
-   * @param array
-   */
-  function well_known_fix($wp) {
-    // check if 'well-known' param exists
-    if (array_key_exists('well-known', $wp->query_vars)) {
-      // if host-meta is set, add required query vars
-      if ($wp->query_vars['well-known'] == 'host-meta') {
-        $wp->query_vars['host-meta'] = true;
-        $wp->query_vars['format'] = 'xrd';
-      // if host-meta.json is set, add required query vars
-      } elseif($wp->query_vars['well-known'] == 'host-meta.json') {
-        $wp->query_vars['host-meta'] = true;
-        $wp->query_vars['format'] = 'json';
-      }
-    }
   }
   
   /**
@@ -205,11 +188,9 @@ class HostMetaPlugin {
 }
 
 add_action('query_vars', array('HostMetaPlugin', 'query_vars'));
-add_action('parse_request', array('HostMetaPlugin', 'well_known_fix'), 1);
 add_action('parse_request', array('HostMetaPlugin', 'parse_request'), 2);
 add_action('generate_rewrite_rules', array('HostMetaPlugin', 'rewrite_rules'), 1);
 
-add_action('host_meta_render_json', array('HostMetaPlugin', 'render_jrd'), 42, 1);
 add_action('host_meta_render_jrd', array('HostMetaPlugin', 'render_jrd'), 42, 1);
 add_action('host_meta_render_xrd', array('HostMetaPlugin', 'render_xrd'), 42, 1);
 

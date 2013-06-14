@@ -31,6 +31,8 @@ From the RFC:
    to be used by multiple Web-based protocols.
 
 == Changelog ==
+= 1.0.3 =
+* better compatibility with other plugins
 = 1.0.2 =
 * bug fix
 = 1.0.1 =
