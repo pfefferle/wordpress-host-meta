@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.0.3
+Version: 1.0.4-dev
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 */
@@ -172,7 +172,7 @@ class HostMetaPlugin {
           }
           if ($cascaded) {
             $xrd .= ">";
-            $xrd .= self::jrdToXrd($temp);
+            $xrd .= self::jrd_to_xrd($temp);
             $xrd .= "</Link>";
           } else {
             $xrd .= " />";
