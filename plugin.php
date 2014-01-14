@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.0.4-dev
+Version: 1.0.4
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 */
@@ -30,12 +30,12 @@ class HostMetaPlugin {
   /**
    * Add rewrite rules
    *
-   * @param WP_Rewrite
+   * @param WP_Rewrite $wp_rewrite
    */
   public static function rewrite_rules($wp_rewrite) {
     $host_meta_rules = array(
-      '(.well-known/host-meta.json)' => 'index.php?well-known=host-meta',
-      '(.well-known/host-meta)' => 'index.php?well-known=host-meta.json',
+      '(.well-known/host-meta.json)' => 'index.php?well-known=host-meta.json',
+      '(.well-known/host-meta)' => 'index.php?well-known=host-meta',
     );
 
     $wp_rewrite->rules = $host_meta_rules + $wp_rewrite->rules;
@@ -44,7 +44,7 @@ class HostMetaPlugin {
   /**
    * renders the output-file
    *
-   * @param array
+   * @param array $wp
    */
   public static function parse_request($wp) {
     // check if "host-meta" param exists
@@ -68,6 +68,8 @@ class HostMetaPlugin {
 
   /**
    * renders the host-meta file in xml
+   *
+   * @param array $host_meta
    */
   public static function render_xrd($host_meta) {
     header("Access-Control-Allow-Origin: *");
@@ -91,6 +93,8 @@ class HostMetaPlugin {
 
   /**
    * renders the host-meta file in json
+   *
+   * @param array $host_meta
    */
   public static function render_jrd($host_meta) {
     header("Access-Control-Allow-Origin: *");
@@ -103,6 +107,7 @@ class HostMetaPlugin {
   /**
    * generates the host-meta base array (and activate filter)
    *
+   * @param array $host_meta
    * @return array
    */
   public static function generate_default_content($host_meta) {
@@ -115,7 +120,7 @@ class HostMetaPlugin {
    * recursive helper to generade the xrd-xml from the jrd array
    *
    * @param string $host_meta
-   * @return string
+   * @return string the genereated XRD file
    */
   public static function jrd_to_xrd($host_meta) {
     $xrd = null;
