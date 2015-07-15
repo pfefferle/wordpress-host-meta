@@ -1,16 +1,18 @@
-=== host-meta ===
-Contributors: pfefferle
-Donate link: http://14101978.de
-Tags: discovery, host-meta, xrd, jrd
-Requires at least: 3.0.5
-Tested up to: 4.3
-Stable tag: 1.1.0
+[![WordPress](https://img.shields.io/wordpress/v/host-meta.svg?style=flat-square)](https://wordpress.org/plugins/host-meta/) [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/host-meta.svg?style=flat-square)](https://wordpress.org/plugins/host-meta/changelog/) [![WordPress](https://img.shields.io/wordpress/plugin/dt/host-meta.svg?style=flat-square)](https://wordpress.org/plugins/host-meta/) 
+
+# host-meta #
+**Contributors:** pfefferle  
+**Donate link:** http://14101978.de  
+**Tags:** discovery, host-meta, xrd, jrd  
+**Requires at least:** 3.0.5  
+**Tested up to:** 4.3  
+**Stable tag:** 1.1.0  
 
 host-meta for WordPress!
 
-== Description ==
+## Description ##
 
-This plugin provides a host-meta - file for WordPress (RFC: http://tools.ietf.org/html/rfc6415).
+**This plugin provides a host-meta - file for WordPress (RFC:** http://tools.ietf.org/html/rfc6415).  
 
 From the RFC:
 
@@ -34,52 +36,52 @@ From the RFC:
 > and specifies a simple, general-purpose metadata document for hosts,
 > to be used by multiple Web-based protocols.
 
-== Changelog ==
+## Changelog ##
 
-= 1.1.0 =
+### 1.1.0 ###
 * removed deprecated `hm` namespace and items
 * WordPress coding standard
 
-= 1.0.4 =
+### 1.0.4 ###
 * some small bug-fixes
 
-= 1.0.3 =
+### 1.0.3 ###
 * better compatibility with other plugins
 
-= 1.0.2 =
+### 1.0.2 ###
 * bug fix
 
-= 1.0.1 =
+### 1.0.1 ###
 * bug fix
 
-= 1.0.0 =
+### 1.0.0 ###
 * refactoring
 * deprecated well-known plugin
 
-= 0.4.3 =
+### 0.4.3 ###
 * implemented new well-known hooks
 
-= 0.4.2 =
+### 0.4.2 ###
 * some changes to support http://unhosted.org
 
-= 0.4.1 =
+### 0.4.1 ###
 * fixed ostatus compatibility issue: http://status.net/open-source/issues/3235
 
-= 0.4 =
+### 0.4 ###
 * added jrd support
 
-= 0.3 =
+### 0.3 ###
 * implements the new well-known hook
 
-= 0.2 =
+### 0.2 ###
 * Initial release
 
-== Installation ==
+## Installation ##
 
 1. Then you have to upload the `host-meta`-folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the *Plugins* menu in WordPress
 3. ...and that's it :)
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
 soon...
