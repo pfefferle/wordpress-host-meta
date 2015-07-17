@@ -34,6 +34,8 @@ From the RFC:
 > and specifies a simple, general-purpose metadata document for hosts,
 > to be used by multiple Web-based protocols.
 
+Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
+
 == Changelog ==
 
 = 1.1.0 =
