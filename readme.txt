@@ -4,7 +4,7 @@ Donate link: http://14101978.de
 Tags: discovery, host-meta, xrd, jrd
 Requires at least: 3.0.5
 Tested up to: 4.3
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 
 host-meta for WordPress!
 
@@ -37,6 +37,10 @@ From the RFC:
 Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
 
 == Changelog ==
+
+= 1.2.0 =
+* added WP-API discovery
+* added RSD discovery
 
 = 1.1.0 =
 * removed deprecated `hm` namespace and items

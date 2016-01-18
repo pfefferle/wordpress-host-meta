@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.1.0
+Version: 1.2.0
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 License: GPLv2 or later
@@ -116,7 +116,7 @@ class HostMetaPlugin {
 		header( 'Access-Control-Allow-Origin: *' );
 		header( 'Content-Type: application/json; charset=' . get_bloginfo( 'charset' ), true );
 
-		echo json_encode( $host_meta );
+		echo wp_json_encode( $host_meta );
 		exit;
 	}
 
@@ -130,12 +130,28 @@ class HostMetaPlugin {
 		$host_meta = array();
 		// add subject
 		$host_meta['subject'] = site_url();
+
 		// add feeds
 		$host_meta['links'] = array(
 			array( 'rel' => 'alternate', 'href' => get_bloginfo( 'atom_url' ), 'type' => 'application/atom+xml' ),
 			array( 'rel' => 'alternate', 'href' => get_bloginfo( 'rss2_url' ), 'type' => 'application/rss+xml' ),
 			array( 'rel' => 'alternate', 'href' => get_bloginfo( 'rdf_url' ), 'type' => 'application/rdf+xml' ),
 		);
+
+		// RSD discovery link
+		$host_meta['links'][] = array(
+			'rel' => 'EditURI',
+			'href' => esc_url( site_url( 'xmlrpc.php?rsd', 'rpc' ) ),
+			'type' => 'application/rsd+xml',
+		);
+
+		// add WordPress API
+		if ( function_exists( 'get_rest_url' ) ) {
+			$host_meta['links'][] = array(
+				'rel' => 'https://api.w.org/',
+				'href' => esc_url( get_rest_url() ),
+			);
+		}
 
 		return $host_meta;
 	}
@@ -159,7 +175,7 @@ class HostMetaPlugin {
 			// print aliases
 			if ( 'aliases' == $type ) {
 				foreach ( $content as $uri ) {
-					$xrd .= '<Alias>' . htmlentities( $uri ) . '</Alias>';
+					$xrd .= '<Alias>' . wp_specialchars( $uri ) . '</Alias>';
 				}
 				continue;
 			}
@@ -167,7 +183,7 @@ class HostMetaPlugin {
 			// print properties
 			if ( 'properties' == $type ) {
 				foreach ( $content as $type => $uri ) {
-					$xrd .= '<Property type="' . htmlentities( $type ) . '">' . htmlentities( $uri ) . '</Property>';
+					$xrd .= '<Property type="' . wp_specialchars( $type ) . '">' . wp_specialchars( $uri ) . '</Property>';
 				}
 				continue;
 			}
@@ -176,9 +192,9 @@ class HostMetaPlugin {
 			if ( 'titles' == $type ) {
 				foreach ( $content as $key => $value ) {
 					if ( 'default' == $key ) {
-						$xrd .= '<Title>' . htmlentities( $value ) . '</Title>';
+						$xrd .= '<Title>' . wp_specialchars( $value ) . '</Title>';
 					} else {
-						$xrd .= '<Title xml:lang="' . htmlentities( $key ) . '">' . htmlentities( $value ) . '</Title>';
+						$xrd .= '<Title xml:lang="' . wp_specialchars( $key ) . '">' . wp_specialchars( $value ) . '</Title>';
 					}
 				}
 				continue;
@@ -196,7 +212,7 @@ class HostMetaPlugin {
 							$temp[ $key ] = $value;
 							$cascaded = true;
 						} else {
-							$xrd .= htmlentities( $key ) . '="' . htmlentities( $value ) . '" ';
+							$xrd .= wp_specialchars( $key ) . '="' . wp_specialchars( $value ) . '" ';
 						}
 					}
 					if ( $cascaded ) {
