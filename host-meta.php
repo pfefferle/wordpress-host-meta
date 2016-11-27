@@ -3,7 +3,7 @@
 Plugin Name: host-meta
 Plugin URI: http://wordpress.org/extend/plugins/host-meta/
 Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.2.0
+Version: 1.2.1
 Author: Matthias Pfefferle
 Author URI: http://notizblog.org/
 License: GPLv2 or later
@@ -24,7 +24,7 @@ class HostMetaPlugin {
 	/**
 	 * init plugin
 	 */
-	public function init() {
+	public static function init() {
 		add_action( 'query_vars', array( 'HostMetaPlugin', 'query_vars' ) );
 		add_action( 'parse_request', array( 'HostMetaPlugin', 'parse_request' ), 2 );
 		add_action( 'generate_rewrite_rules', array( 'HostMetaPlugin', 'rewrite_rules' ), 1 );
@@ -73,9 +73,9 @@ class HostMetaPlugin {
 			return;
 		}
 
-		if ( $wp->query_vars['well-known'] == 'host-meta' ) {
+		if ( 'host-meta' == $wp->query_vars['well-known'] ) {
 			$format = 'xrd';
-		} elseif ( $wp->query_vars['well-known'] == 'host-meta.json' ) {
+		} elseif ( 'host-meta.json' == $wp->query_vars['well-known'] ) {
 			$format = 'jrd';
 		} else {
 			return;

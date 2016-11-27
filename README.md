@@ -5,8 +5,8 @@
 **Donate link:** http://14101978.de  
 **Tags:** discovery, host-meta, xrd, jrd  
 **Requires at least:** 3.0.5  
-**Tested up to:** 4.3  
-**Stable tag:** 1.2.0  
+**Tested up to:** 4.6.1  
+**Stable tag:** 1.2.1  
 
 host-meta for WordPress!
 
