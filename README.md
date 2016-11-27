@@ -40,6 +40,10 @@ Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-a
 
 ## Changelog ##
 
+### 1.2.1 ###
+* WordPress coding stye
+* added missing „static“ to init function
+
 ### 1.2.0 ###
 * added WP-API discovery
 * added RSD discovery
