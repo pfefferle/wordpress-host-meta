@@ -1,10 +1,10 @@
 === host-meta ===
 Contributors: pfefferle
 Donate link: http://14101978.de
-Tags: discovery, host-meta, xrd, jrd
+Tags: discovery, host-meta, xrd, jrd, ostatus
 Requires at least: 3.0.5
-Tested up to: 4.6.1
-Stable tag: 1.2.1
+Tested up to: 4.7.4
+Stable tag: 1.2.2
 
 host-meta for WordPress!
 
@@ -37,6 +37,10 @@ From the RFC:
 Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
 
 == Changelog ==
+
+= 1.2.2 =
+* updated escaping methods
+* small changes
 
 = 1.2.1 =
 * WordPress coding stye

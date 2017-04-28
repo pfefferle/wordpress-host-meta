@@ -1,14 +1,14 @@
 <?php
 /*
-Plugin Name: host-meta
-Plugin URI: http://wordpress.org/extend/plugins/host-meta/
-Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
-Version: 1.2.1
-Author: Matthias Pfefferle
-Author URI: http://notizblog.org/
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-*/
+ * Plugin Name: host-meta
+ * Plugin URI: https://github.com/pfefferle/wordpress-host-meta
+ * Description: Host Metadata for WordPress (RFC: http://tools.ietf.org/html/rfc6415)
+ * Version: 1.2.2
+ * Author: Matthias Pfefferle
+ * Author URI: http://notizblog.org/
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 register_activation_hook( __FILE__, 'flush_rewrite_rules' );
 register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
@@ -95,7 +95,7 @@ class HostMetaPlugin {
 	public static function render_xrd( $host_meta ) {
 		header( 'Access-Control-Allow-Origin: *' );
 		header( 'Content-Type: application/xrd+xml; charset=' . get_bloginfo( 'charset' ), true );
-		echo '<?xml version="1.0" encoding="UTF-8"?>';
+		echo '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
 ?>
 <XRD xmlns="http://docs.oasis-open.org/ns/xri/xrd-1.0<?php do_action( 'host_meta_ns' ); ?>">
 <?php
@@ -168,14 +168,14 @@ class HostMetaPlugin {
 		foreach ( $host_meta as $type => $content ) {
 			// print subject
 			if ( 'subject' == $type ) {
-				$xrd .= "<Subject>$content</Subject>";
+				$xrd .= '<Subject>' . esc_html( $content ) . '</Subject>';
 				continue;
 			}
 
 			// print aliases
 			if ( 'aliases' == $type ) {
 				foreach ( $content as $uri ) {
-					$xrd .= '<Alias>' . wp_specialchars( $uri ) . '</Alias>';
+					$xrd .= '<Alias>' . esc_url( $uri ) . '</Alias>';
 				}
 				continue;
 			}
@@ -183,7 +183,7 @@ class HostMetaPlugin {
 			// print properties
 			if ( 'properties' == $type ) {
 				foreach ( $content as $type => $uri ) {
-					$xrd .= '<Property type="' . wp_specialchars( $type ) . '">' . wp_specialchars( $uri ) . '</Property>';
+					$xrd .= '<Property type="' . esc_attr( $type ) . '">' . esc_url( $uri ) . '</Property>';
 				}
 				continue;
 			}
@@ -192,9 +192,9 @@ class HostMetaPlugin {
 			if ( 'titles' == $type ) {
 				foreach ( $content as $key => $value ) {
 					if ( 'default' == $key ) {
-						$xrd .= '<Title>' . wp_specialchars( $value ) . '</Title>';
+						$xrd .= '<Title>' . esc_html( $value ) . '</Title>';
 					} else {
-						$xrd .= '<Title xml:lang="' . wp_specialchars( $key ) . '">' . wp_specialchars( $value ) . '</Title>';
+						$xrd .= '<Title xml:lang="' . esc_attr( $key ) . '">' . esc_html( $value ) . '</Title>';
 					}
 				}
 				continue;
@@ -212,7 +212,7 @@ class HostMetaPlugin {
 							$temp[ $key ] = $value;
 							$cascaded = true;
 						} else {
-							$xrd .= wp_specialchars( $key ) . '="' . wp_specialchars( $value ) . '" ';
+							$xrd .= esc_attr( $key ) . '="' . esc_attr( $value ) . '" ';
 						}
 					}
 					if ( $cascaded ) {
