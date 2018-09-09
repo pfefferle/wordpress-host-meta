@@ -25,12 +25,25 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    makepot: {
+      target: {
+        options: {
+          mainFile: 'host-meta.php',
+          domainPath: '/languages',
+          exclude: ['bin/.*', '.git/.*', 'vendor/.*'],
+          potFilename: 'host-meta.pot',
+          type: 'wp-plugin',
+          updateTimestamp: true
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-wp-readme-to-markdown');
   grunt.loadNpmTasks('grunt-replace');
+  grunt.loadNpmTasks('grunt-wp-i18n');
 
   // Default task(s).
-  grunt.registerTask('default', ['wp_readme_to_markdown', 'replace']);
+  grunt.registerTask('default', ['wp_readme_to_markdown', 'replace', 'makepot']);
 };
