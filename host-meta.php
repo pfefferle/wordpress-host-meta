@@ -3,10 +3,10 @@
  * Plugin Name: host-meta
  * Plugin URI: https://github.com/pfefferle/wordpress-host-meta
  * Description: Host Metadata for WordPress
- * Version: 1.2.3
+ * Version: 1.3.0
  * Author: Matthias Pfefferle
  * Author URI: https://notiz.blog/
- * License: GPLv2 or later
+ * License: GPL-2.0-or-later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: host-meta
  * Domain Path: /languages

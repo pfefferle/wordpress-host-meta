@@ -1,12 +1,16 @@
 [![WordPress](https://img.shields.io/wordpress/v/host-meta.svg?style=flat-square)](https://wordpress.org/plugins/host-meta/) [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/host-meta.svg?style=flat-square)](https://wordpress.org/plugins/host-meta/changelog/) [![WordPress](https://img.shields.io/wordpress/plugin/dt/host-meta.svg?style=flat-square)](https://wordpress.org/plugins/host-meta/) 
 
 # host-meta #
+
 **Contributors:** pfefferle  
 **Donate link:** https://notiz.blog/donate/  
 **Tags:** discovery, host-meta, xrd, jrd, ostatus  
 **Requires at least:** 3.0.5  
-**Tested up to:** 4.9.8  
-**Stable tag:** 1.2.1  
+**Tested up to:** 4.9.9  
+**Stable tag:** 1.3.0  
+**Requires PHP:** 5.2  
+**License:** GPL-2.0-or-later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 host-meta for WordPress!
 
@@ -25,6 +29,11 @@ From the RFC:
 Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
 
 ## Changelog ##
+
+### 1.3.0 ###
+
+* complete refactoring
+* updated dependencies
 
 ### 1.2.2 ###
 
