@@ -5,7 +5,7 @@ Donate link: https://notiz.blog/donate/
 Tags: discovery, host-meta, xrd, jrd, ostatus
 Requires at least: 3.0.5
 Tested up to: 4.9.9
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 Requires PHP: 5.2
 License: GPL-2.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,6 +27,10 @@ From the RFC:
 Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
 
 == Changelog ==
+
+= 1.3.1 =
+
+* fixed "flush rewrite rules"
 
 = 1.3.0 =
 

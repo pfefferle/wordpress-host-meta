@@ -20,16 +20,10 @@ class Host_Meta {
 
 	/**
 	 * Add rewrite rules
-	 *
-	 * @param WP_Rewrite $wp_rewrite
 	 */
-	public static function rewrite_rules( $wp_rewrite ) {
-		$host_meta_rules = array(
-			'(.well-known/host-meta.json)' => 'index.php?well-known=host-meta.json',
-			'(.well-known/host-meta)' => 'index.php?well-known=host-meta',
-		);
-
-		$wp_rewrite->rules = $host_meta_rules + $wp_rewrite->rules;
+	public static function rewrite_rules() {
+		add_rewrite_rule( '^.well-known/host-meta.json', 'index.php?well-known=host-meta.json', 'top' );
+		add_rewrite_rule( '^.well-known/host-meta', 'index.php?well-known=host-meta', 'top' );
 	}
 
 	/**
