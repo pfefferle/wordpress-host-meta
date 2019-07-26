@@ -17,7 +17,7 @@ env:
   - WP_TRAVISCI=travis:phpunit
   - SVN_REPO: https://plugins.svn.wordpress.org/host-meta/
   - GH_REF: https://github.com/pfefferle/wordpress-host-meta.git
-  - secure: "TFXc9CK6cG4Qpwm0sAhA0nEwMBfKKTdp3YN+rVV8KZrSmUDGw8QRlnFAxwWVG9yR1+TBVSS3Rrm38iRU8mvXkl5Vy6/HySqDF2QOO/gqhDZRpgCOq0mhxfzSc+tx2gGXbkRQw+eXt02p6VIHDi+bfll2rdvsE2XxkVgjvYJ+OMnfiqnESwac2+/rxii8qAvQwGnH/Cx7mpSFmt5KmRkR0XL05b9NEV+YkUpSQfSMx45IR2MZKlKAALTulDFIXvcwRMHSydgH8RoLDOioajgUzgFv1vBOWbCvdoHVvrNk2phtYgJ1yvOsMdKeb+Y5ZStag1HeKhZrzFMWJabe63N5Yukzo8gzU6doAPYaJ4CX6KaEEJoQyzxd5IUXZThNcnKStRVJbWngG850ROVCMg8rQYBQXr9HfeHMKGHCXzdXHc1zc13B5ycTL6pc0vWWys16Mdu8ivaPfk7qdnRZs2mpMeYZc4FoRy/xqavcyZX7kGnlONVcgoB4lP5eEQzu+wCWyjXcl4wrQfhCFCrS86jp1oLVUAS9GemPJRwVTWogEg+Rr5iMbWv6ZGh3F8fe5SEEAtThe8W9/hDC7NiZrbdA8hTyccRd91E7EEdCoZrTgc9VjKVkjxLjKHmocruevQQjafda5xsjRRZakAham9r9Rmfk4SH/4KBbWsFJlbHXZjE="
+  - secure: "m9oh9rTG2Zp3DrRAtLvcc5ft9vdLJqChEPFFJGNGS1BscoocFVPIUocVutjdccaFhnktAySL7GcN6DR2IRIP5RSeJURJNRszYKjJTeqg6Jxr8bH6ooqBFth4/JROfL6nc3NhKP7UM0UWgAVsmR/RBiO+yPweORyN9UM0R5WXWfBv+Yw5p8IukojMkpTn5u+Bo0Z4QpVBXb690HXsY5TDJrK3XsmtVe0XLtFJxLv+k9WFOZisUrm5DPT3y5Ln0aAj6zFidzEIU8+iiTEvQoPM+EujZQIJHGiOl5vlgVB3NZ2OeJcWuEnFTuDrNwXX0w83Bk/j0XWnitoD/D5KpEul0KB3VlAC1328Hoh9FgH5EAjoLREb913bSQPINBVf0KEMmdUwS40XzYkHIvkKIq+xE8Q75mILxkWUHI1v5u0BeJbsTnJq3eEJdiSE4pgLIiR8mhnaE3JQQJQP2QjdH1YMVmTgWKUbwWGikt+ZUkGv8C/gbUSabcIatdbAN1EXc9/0Ydwu4bWl0Ev3DRnWr4jW3vbvs4Rvr+WTMufEuTy7xDVWBNbkbZATue5RWPTP98hppjZ+ZbmfbDevnVIk2ONYl1X/eU7iFQNMN0V8K5NhI8Es8YNi2rx5/ps4SrkBehegAz03W3kI/PFIljgP3h9sKOm2Rjk4CxQo/TgYTCzFcig="
 matrix:
   include:
   - php: 7.2
@@ -25,7 +25,7 @@ matrix:
   - php: 7.0
   - php: 5.6
   - php: 5.6
-    env: WP_PLUGIN_DEPLOY=1
+    env: WP_VERSION=latest WP_MULTISITE=0 WP_PLUGIN_DEPLOY=1
 before_script:
 - |
   # Remove Xdebug for a huge performance increase:
