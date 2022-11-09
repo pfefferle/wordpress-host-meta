@@ -2,11 +2,11 @@
 
 # host-meta #
 
-**Contributors:** pfefferle  
+**Contributors:** [pfefferle](https://profiles.wordpress.org/pfefferle/)  
 **Donate link:** https://notiz.blog/donate/  
 **Tags:** discovery, host-meta, xrd, jrd, ostatus  
 **Requires at least:** 3.0.5  
-**Tested up to:** 6.0  
+**Tested up to:** 6.1  
 **Stable tag:** 1.3.2  
 **Requires PHP:** 5.2  
 **License:** GPL-2.0-or-later  
@@ -16,7 +16,7 @@ host-meta for WordPress!
 
 ## Description ##
 
-**This plugin provides a host-meta - file for WordPress (RFC:** http://tools.ietf.org/html/rfc6415).  
+This plugin provides a host-meta - file for WordPress (RFC: http://tools.ietf.org/html/rfc6415).
 
 From the RFC:
 
