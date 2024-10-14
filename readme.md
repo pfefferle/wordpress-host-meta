@@ -1,18 +1,18 @@
-=== host-meta ===
+# host-meta
 
-Contributors: pfefferle
-Donate link: https://notiz.blog/donate/
-Tags: discovery, host-meta, xrd, jrd, ostatus
-Requires at least: 3.0.5
-Tested up to: 6.6
-Stable tag: 1.3.2
-Requires PHP: 5.2
-License: GPL-2.0-or-later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+- Contributors: pfefferle
+- Donate link: https://notiz.blog/donate/
+- Tags: discovery, host-meta, xrd, jrd, ostatus
+- Requires at least: 3.0.5
+- Tested up to: 6.6
+- Stable tag: 1.3.2
+- Requires PHP: 5.2
+- License: GPL-2.0-or-later
+- License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 host-meta for WordPress!
 
-== Description ==
+## Description
 
 This plugin provides a host-meta - file for WordPress (RFC: http://tools.ietf.org/html/rfc6415).
 
@@ -26,91 +26,91 @@ From the RFC:
 
 Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
 
-== Changelog ==
+## Changelog
 
-= 1.3.2 =
+### 1.3.2
 
 * update requirements
 
-= 1.3.1 =
+### 1.3.1
 
 * fixed "flush rewrite rules"
 
-= 1.3.0 =
+### 1.3.0
 
 * complete refactoring
 * updated dependencies
 
-= 1.2.2 =
+### 1.2.2
 
 * updated escaping methods
 * small changes
 
-= 1.2.1 =
+### 1.2.1
 
 * WordPress coding stye
 * added missing „static“ to init function
 
-= 1.2.0 =
+### 1.2.0
 
 * added WP-API discovery
 * added RSD discovery
 
-= 1.1.0 =
+### 1.1.0
 
 * removed deprecated `hm` namespace and items
 * WordPress coding standard
 
-= 1.0.4 =
+### 1.0.4
 
 * some small bug-fixes
 
-= 1.0.3 =
+### 1.0.3
 
 * better compatibility with other plugins
 
-= 1.0.2 =
+### 1.0.2
 
 * bug fix
 
-= 1.0.1 =
+### 1.0.1
 
 * bug fix
 
-= 1.0.0 =
+### 1.0.0
 
 * refactoring
 * deprecated well-known plugin
 
-= 0.4.3 =
+### 0.4.3
 
 * implemented new well-known hooks
 
-= 0.4.2 =
+### 0.4.2
 
 * some changes to support http://unhosted.org
 
-= 0.4.1 =
+### 0.4.1
 
 * fixed ostatus compatibility issue: http://status.net/open-source/issues/3235
 
-= 0.4 =
+### 0.4
 
 * added jrd support
 
-= 0.3 =
+### 0.3
 
 * implements the new well-known hook
 
-= 0.2 =
+### 0.2
 
 * Initial release
 
-== Installation ==
+=### Installation=
 
 Follow the normal instructions for [installing WordPress plugins](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins).
 
-= Automatic Plugin Installation =
+### Automatic Plugin Installation
 
 To add a WordPress Plugin using the [built-in plugin installer](https://codex.wordpress.org/Administration_Screens#Add_New_Plugins):
 
@@ -122,7 +122,7 @@ To add a WordPress Plugin using the [built-in plugin installer](https://codex.wo
 1. The resulting installation screen will list the installation as successful or note any problems during the install.
 1. If successful, click **Activate Plugin** to activate it, or **Return to Plugin Installer** for further actions.
 
-= Manual Plugin Installation =
+### Manual Plugin Installation
 
 There are a few cases when manually installing a WordPress Plugin is appropriate.
 
