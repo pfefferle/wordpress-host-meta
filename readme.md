@@ -106,7 +106,7 @@ Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-a
 
 * Initial release
 
-=### Installation=
+## Installation
 
 Follow the normal instructions for [installing WordPress plugins](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins).
 
