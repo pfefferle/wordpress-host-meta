@@ -20,3 +20,4 @@ jobs:
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SLUG: host-meta
         README_NAME: readme.md
+        IGNORE_OTHER_FILES: true
