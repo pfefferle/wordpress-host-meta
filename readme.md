@@ -4,7 +4,7 @@
 - Donate link: https://notiz.blog/donate/
 - Tags: discovery, host-meta, xrd, jrd, ostatus
 - Requires at least: 3.0.5
-- Tested up to: 6.6
+- Tested up to: 6.7
 - Stable tag: 1.3.2
 - Requires PHP: 5.2
 - License: GPL-2.0-or-later
