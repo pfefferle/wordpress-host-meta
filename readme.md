@@ -197,6 +197,18 @@ You only need this if your site can't install plugins on its own, or if you want
 
 Please make a backup of your site before you install plugins by hand.
 
+### Installation with Composer
+
+If you manage your site with Composer, you can install the plugin from [Packagist](https://packagist.org/packages/pfefferle/wordpress-host-meta):
+
+    composer require pfefferle/wordpress-host-meta
+
+Or from [WPackagist](https://wpackagist.org/search?q=host-meta), which mirrors the WordPress.org version:
+
+    composer require wpackagist-plugin/host-meta
+
+Composer puts the plugin into your plugins folder, you still have to activate it.
+
 ### After the installation
 
 The plugin needs "pretty" permalinks. If your addresses look like `?p=123`, go to *Settings > Permalinks* and pick any other option, for example "Post name".
