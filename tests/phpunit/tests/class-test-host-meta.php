@@ -95,7 +95,13 @@ class Test_Host_Meta extends \WP_UnitTestCase {
 		);
 		\update_option( 'wp_page_for_privacy_policy', $page_id );
 
-		$attachment_id = self::factory()->attachment->create_upload_object( DIR_TESTDATA . '/images/test-image.png' );
+		// An attachment record is enough, the file itself is never read.
+		$attachment_id = self::factory()->attachment->create(
+			array(
+				'post_mime_type' => 'image/png',
+				'file'           => 'icon.png',
+			)
+		);
 		\update_option( 'site_icon', $attachment_id );
 
 		$links = Host_Meta::generate_default_content()['links'];
@@ -106,8 +112,6 @@ class Test_Host_Meta extends \WP_UnitTestCase {
 		$icon = \wp_list_filter( $links, array( 'rel' => 'icon' ) );
 		$this->assertSame( 'image/png', \reset( $icon )['type'] );
 		$this->assertSame( \get_site_icon_url( 512 ), \reset( $icon )['href'] );
-
-		\wp_delete_attachment( $attachment_id, true );
 	}
 
 	/**
