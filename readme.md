@@ -49,7 +49,9 @@ Open `https://yoursite.com/.well-known/host-meta` in your browser (with your own
 
 ### I get a "Page not found" error
 
-WordPress probably did not pick up the new address yet. Go to *Settings > Permalinks* and click *Save Changes*, you don't have to change anything. Then try again.
+WordPress probably did not pick up the new address yet. Go to *Settings > Permalinks* and click *Save Changes*. Then try again.
+
+If your permalinks are set to "Plain" (addresses like `?p=123`), the file can't work. Pick any other option there, for example "Post name".
 
 If it still does not work, your web server might block addresses that start with a dot (like `/.well-known/`). Your hosting provider can help with that.
 
@@ -174,6 +176,29 @@ For the XML version only, there are two more actions: `host_meta_ns` adds namesp
 
 ## Installation
 
-1. Install the plugin from the WordPress plugin directory, or upload the `host-meta` folder to `/wp-content/plugins/`
-2. Activate it through the *Plugins* menu
-3. That's it, there are no settings
+Follow the normal instructions for [installing WordPress plugins](https://wordpress.org/documentation/article/manage-plugins/#installing-plugins-1).
+
+### Automatic installation
+
+1. In your WordPress admin, go to *Plugins > Add New Plugin*.
+2. Search for "host-meta".
+3. Click *Install Now* and then *Activate*.
+
+That's it, there are no settings.
+
+### Manual installation
+
+You only need this if your site can't install plugins on its own, or if you want to try the [latest development version](https://github.com/pfefferle/wordpress-host-meta).
+
+1. Download the plugin from [WordPress.org](https://wordpress.org/plugins/host-meta/) or from the [GitHub releases](https://github.com/pfefferle/wordpress-host-meta/releases).
+2. Unzip it. You should get a folder called `host-meta`.
+3. Upload that folder to `wp-content/plugins/` on your server, for example with an FTP program.
+4. In your WordPress admin, go to *Plugins* and click *Activate* below "host-meta".
+
+Please make a backup of your site before you install plugins by hand.
+
+### After the installation
+
+The plugin needs "pretty" permalinks. If your addresses look like `?p=123`, go to *Settings > Permalinks* and pick any other option, for example "Post name".
+
+Then open `https://yoursite.com/.well-known/host-meta` (with your own domain) to check that it works.
