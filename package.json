@@ -1,8 +1,16 @@
 {
   "name": "wordpress-host-meta",
-  "description": "Host-Meta for WordPress",
+  "description": "Helps other apps and services find out what your site offers.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pfefferle/wordpress-host-meta.git"
+  },
   "author": "Matthias Pfefferle",
-  "license": "MIT",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/pfefferle/wordpress-host-meta/issues"
+  },
+  "homepage": "https://github.com/pfefferle/wordpress-host-meta",
   "devDependencies": {
     "@wordpress/env": "^11.4.0"
   },

@@ -2,41 +2,44 @@
 /**
  * Plugin Name: host-meta
  * Plugin URI: https://github.com/pfefferle/wordpress-host-meta
- * Description: Host Metadata for WordPress
- * Version: 1.3.2
+ * Description: Helps other apps and services find out what your site offers.
+ * Version: 1.4.0
+ * Requires at least: 6.4
+ * Requires PHP: 7.4
  * Author: Matthias Pfefferle
  * Author URI: https://notiz.blog/
  * License: GPL-2.0-or-later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: host-meta
- * Domain Path: /languages
+ *
+ * @package Host_Meta
  */
 
-register_activation_hook( __FILE__, 'host_meta_flush_rewrite_rules' );
-register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+namespace Host_Meta;
+
+\defined( 'ABSPATH' ) || exit;
+
+\define( 'HOST_META_VERSION', '1.4.0' );
+\define( 'HOST_META_PLUGIN_DIR', \plugin_dir_path( __FILE__ ) );
+\define( 'HOST_META_PLUGIN_FILE', __FILE__ );
+
+require_once HOST_META_PLUGIN_DIR . 'includes/class-host-meta.php';
+require_once HOST_META_PLUGIN_DIR . 'includes/deprecated.php';
 
 /**
- * Initialize plugin
+ * Initialize the plugin.
  */
-function host_meta_init() {
-	require_once( dirname( __FILE__ ) . '/includes/class-host-meta.php' );
-
-	add_action( 'query_vars', array( 'Host_Meta', 'query_vars' ) );
-	add_action( 'parse_request', array( 'Host_Meta', 'parse_request' ), 2 );
-	add_action( 'init', array( 'Host_Meta', 'rewrite_rules' ), 1 );
-
-	add_action( 'host_meta_render_jrd', array( 'Host_Meta', 'render_jrd' ), 42, 1 );
-	add_action( 'host_meta_render_xrd', array( 'Host_Meta', 'render_xrd' ), 42, 1 );
-
-	add_filter( 'host_meta', array( 'Host_Meta', 'generate_default_content' ), 0, 1 );
+function plugin_init() {
+	Host_Meta::init();
 }
-add_action( 'plugins_loaded', 'host_meta_init' );
+\add_action( 'plugins_loaded', __NAMESPACE__ . '\plugin_init' );
 
 /**
- * Generate rewrite rules and flush the old ruleset
+ * Add the rewrite rules and flush the old ones.
  */
-function host_meta_flush_rewrite_rules() {
-	require_once( dirname( __FILE__ ) . '/includes/class-host-meta.php' );
+function activate() {
 	Host_Meta::rewrite_rules();
-	flush_rewrite_rules();
+	\flush_rewrite_rules();
 }
+\register_activation_hook( __FILE__, __NAMESPACE__ . '\activate' );
+\register_deactivation_hook( __FILE__, '\flush_rewrite_rules' );
