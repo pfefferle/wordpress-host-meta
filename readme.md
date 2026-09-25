@@ -2,31 +2,97 @@
 
 - Contributors: pfefferle
 - Donate link: https://notiz.blog/donate/
-- Tags: discovery, host-meta, xrd, jrd, ostatus
-- Requires at least: 3.0.5
+- Tags: host-meta, discovery, well-known, webfinger, fediverse
+- Requires at least: 6.4
 - Tested up to: 7.1
-- Stable tag: 1.3.2
+- Stable tag: 1.4.0
 - Requires PHP: 7.4
 - License: GPL-2.0-or-later
-- License URI: http://www.gnu.org/licenses/gpl-2.0.html
+- License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-host-meta for WordPress!
+Helps other apps and services find out what your site offers.
 
 ## Description
 
-This plugin provides a host-meta - file for WordPress (RFC: http://tools.ietf.org/html/rfc6415).
+When an app or service wants to connect to your site, it first has to find out what your site supports. Where are the feeds? Is there an API? Can it look up the people who write here?
 
-From the RFC:
+host-meta is a small file that answers these questions. It always lives at the same address, `/.well-known/host-meta`, so apps know where to look. The format is an [internet standard](https://www.rfc-editor.org/rfc/rfc6415).
 
-> Web-based protocols often require the discovery of host policy or metadata, where host is not a single resource but the entity controlling the collection of resources identified by URIs with a common host as defined.  While these protocols have a wide range of metadata needs, they often define metadata that is concise, has simple syntax requirements, and can benefit from storing its metadata in a common location used by other related protocols.
+This plugin adds that file to your WordPress site. You don't have to do anything else, there are no settings.
 
-> Because there is no URI or a resource available to describe a host, many of the methods used for associating per-resource metadata (such as HTTP headers) are not available.  This often leads to the overloading of the root HTTP resource (e.g. 'http://example.com/') with host metadata that is not specific to the root resource (e.g. a home page or web application), and which often has nothing to do it.
+### Why would I need it?
 
-> This memo registers the "well-known" URI suffix 'host-meta' in the Well-Known URI Registry established by, and specifies a simple, general-purpose metadata document for hosts, to be used by multiple Web-based protocols.
+Most visitors never see it. It is for other software. You need it if a plugin or service asks for it, for example:
 
-Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-and-well-known-uris/)
+* The [WebFinger](https://wordpress.org/plugins/webfinger/) plugin can add a link to it, so older apps can still find the profiles of your authors.
+* The [Open Search Document](https://wordpress.org/plugins/open-search-document/) plugin adds your site search to it.
+* Feed readers and other tools can use it to find your feeds and the WordPress API.
+
+### What is in the file?
+
+* Links to your feeds (Atom, RSS and RDF)
+* A link to the WordPress REST API
+* A link for blogging apps (RSD)
+* Your site icon, if you set one under *Appearance > Customize > Site Identity*
+* Your privacy policy, if you published one under *Settings > Privacy*
+* Everything other plugins add to it
+
+The file comes in two versions: XML at `/.well-known/host-meta` and JSON at `/.well-known/host-meta.json`. Both have the same content.
+
+Logo by [Eran Hammer](https://web.archive.org/web/20091130230307/http://hueniverse.com/2009/11/host-meta-aka-site-meta-and-well-known-uris/)
+
+## Frequently Asked Questions
+
+### How do I check that it works?
+
+Open `https://yoursite.com/.well-known/host-meta` in your browser (with your own domain). You should see a short XML file with some links.
+
+### I get a "Page not found" error
+
+WordPress probably did not pick up the new address yet. Go to *Settings > Permalinks* and click *Save Changes*, you don't have to change anything. Then try again.
+
+If it still does not work, your web server might block addresses that start with a dot (like `/.well-known/`). Your hosting provider can help with that.
+
+### Does it change anything on my site?
+
+No. Your pages, posts and theme stay the same. The plugin only adds the file.
+
+### I am a developer, can I add my own links?
+
+Yes, with the `host_meta` filter. The data uses the JSON format (JRD), the plugin creates the XML version from it.
+
+    function custom_host_meta( $host_meta ) {
+        $host_meta['links'][] = array(
+            'rel'      => 'lrdd',
+            'type'     => 'application/jrd+json',
+            'template' => 'https://example.com/.well-known/webfinger?resource={uri}',
+        );
+
+        return $host_meta;
+    }
+    add_filter( 'host_meta', 'custom_host_meta' );
+
+For the XML version only, there are two more actions: `host_meta_ns` adds namespaces to the root element and `host_meta_xrd` adds elements right before the closing tag. Both expect you to echo your output:
+
+    function custom_host_meta_ns() {
+        echo ' xmlns:foo="https://example.com/ns"';
+    }
+    add_action( 'host_meta_ns', 'custom_host_meta_ns' );
 
 ## Changelog
+
+### 1.4.0
+
+* Moved the code into the `Host_Meta` namespace, the global `Host_Meta` class still works but is deprecated
+* Namespaces added with `host_meta_ns` no longer end up inside the `xmlns` attribute
+* Aliases like `acct:` URIs and property values are no longer dropped by the URL escaping
+* Properties with a `null` value are rendered with `xsi:nil`
+* URLs in the JSON version are no longer HTML encoded
+* The rewrite rules only match the exact well-known URLs
+* Requires WordPress 6.4 and PHP 7.4
+* Added links to the site icon and the privacy policy
+* Removed the outdated translation template, WordPress.org provides the translations
+* Added tests and a new readme
 
 ### 1.3.2
 
@@ -108,38 +174,6 @@ Logo by [Eran Hammer](http://hueniverse.com/2009/11/23/host-meta-aka-site-meta-a
 
 ## Installation
 
-Follow the normal instructions for [installing WordPress plugins](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins).
-
-### Automatic Plugin Installation
-
-To add a WordPress Plugin using the [built-in plugin installer](https://codex.wordpress.org/Administration_Screens#Add_New_Plugins):
-
-1. Go to [Plugins](https://codex.wordpress.org/Administration_Screens#Plugins) > [Add New](https://codex.wordpress.org/Plugins_Add_New_Screen).
-1. Type "`host-meta`" into the **Search Plugins** box.
-1. Find the WordPress Plugin you wish to install.
-    1. Click **Details** for more information about the Plugin and instructions you may wish to print or save to help setup the Plugin.
-    1. Click **Install Now** to install the WordPress Plugin.
-1. The resulting installation screen will list the installation as successful or note any problems during the install.
-1. If successful, click **Activate Plugin** to activate it, or **Return to Plugin Installer** for further actions.
-
-### Manual Plugin Installation
-
-There are a few cases when manually installing a WordPress Plugin is appropriate.
-
-* If you wish to control the placement and the process of installing a WordPress Plugin.
-* If your server does not permit automatic installation of a WordPress Plugin.
-* If you want to try the [latest development version](https://github.com/pfefferle/wordpress-host-meta).
-
-Installation of a WordPress Plugin manually requires FTP familiarity and the awareness that you may put your site at risk if you install a WordPress Plugin incompatible with the current version or from an unreliable source.
-
-Backup your site completely before proceeding.
-
-To install a WordPress Plugin manually:
-
-* Download your WordPress Plugin to your desktop.
-    * Download from [the WordPress directory](https://wordpress.org/plugins/host-meta/)
-    * Download from [GitHub](https://github.com/pfefferle/wordpress-host-meta/releases)
-* If downloaded as a zip archive, extract the Plugin folder to your desktop.
-* With your FTP program, upload the Plugin folder to the `wp-content/plugins` folder in your WordPress directory online.
-* Go to [Plugins screen](https://codex.wordpress.org/Administration_Screens#Plugins) and find the newly uploaded Plugin in the list.
-* Click **Activate** to activate it.
+1. Install the plugin from the WordPress plugin directory, or upload the `host-meta` folder to `/wp-content/plugins/`
+2. Activate it through the *Plugins* menu
+3. That's it, there are no settings
